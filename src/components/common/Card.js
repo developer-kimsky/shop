@@ -1,9 +1,17 @@
 import React from "react";
 import { Col } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const Card = ({ shoes }) => {
+  const navigate = useNavigate();
+
   return (
-    <Col key={shoes.id}>
+    <Col
+      key={shoes.id}
+      onClick={() => {
+        navigate(`/detail/${shoes.id}`);
+      }}
+    >
       <img
         src={
           "https://codingapple1.github.io/shop/shoes" + (shoes.id + 1) + ".jpg"
@@ -11,7 +19,6 @@ const Card = ({ shoes }) => {
         width="80%"
       />
       <h4>{shoes.title}</h4>
-      <p>{shoes.content}</p>
       <p>{shoes.price}</p>
     </Col>
   );

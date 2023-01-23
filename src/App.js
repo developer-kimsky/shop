@@ -16,7 +16,13 @@ function App() {
     <div className="App">
       <Navbar bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand href="#home">Monkey Market</Navbar.Brand>
+          <Navbar.Brand
+            onClick={() => {
+              navigate("/");
+            }}
+          >
+            Monkey Market
+          </Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link
               onClick={() => {
@@ -27,10 +33,10 @@ function App() {
             </Nav.Link>
             <Nav.Link
               onClick={() => {
-                navigate("/detail");
+                navigate("/about");
               }}
             >
-              Detail
+              About
             </Nav.Link>
           </Nav>
         </Container>
