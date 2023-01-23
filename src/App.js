@@ -7,9 +7,13 @@ import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import Detail from "./components/pages/detail";
 import About from "./components/pages/about";
 import Event from "./components/pages/event";
+import axios from "axios";
 
 function App() {
-  let [shoes] = useState(data);
+  let [shoes, setShoes] = useState(data);
+  let [count, setCount] = useState(2);
+  let [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
 
   return (
@@ -51,10 +55,38 @@ function App() {
               <Container>
                 <Row>
                   {shoes.map((item) => {
-                    return <Card shoes={item} />;
+                    return <Card key={item.id} shoes={item} />;
                   })}
                 </Row>
               </Container>
+              {loading && <div>로딩중입니다.</div>}
+              {count < 4 && (
+                <button
+                  onClick={() => {
+                    if (count < 4) {
+                      setLoading(true);
+                      axios
+                        .get(
+                          `https://codingapple1.github.io/shop/data${count}.json`
+                        )
+                        .then((result) => {
+                          let copy = [...shoes, ...result.data];
+                          setLoading(false);
+                          setShoes(copy);
+                          setCount((prevState) => prevState + 1);
+                        })
+                        .catch(() => {
+                          setLoading(false);
+                          console.log("실패했다능");
+                        });
+                    } else {
+                      alert("상품이 없습니다.");
+                    }
+                  }}
+                >
+                  더보기
+                </button>
+              )}
             </>
           }
         />

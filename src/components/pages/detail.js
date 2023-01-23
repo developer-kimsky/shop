@@ -1,14 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 const Detail = ({ shoes }) => {
   const { id } = useParams();
-  let product = shoes.find(function (x) {
-    return x.id == id;
-  });
+  let product = shoes.find((x) => x.id == id);
+
+  useEffect(() => {
+    // let a = setTimeout(() => {
+    //   document.querySelector(".test").style.display = "none";
+    // }, 2000);
+
+    return () => {};
+  }, []);
 
   return (
     <div className="container">
+      {/* <div className="test">여기라능</div> */}
       <div className="row">
         <div className="col-md-6">
           <img
