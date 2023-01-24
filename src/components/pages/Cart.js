@@ -1,24 +1,14 @@
 import React from "react";
 import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { addCount } from "../../store/cartSlice";
-import { changeAge, changeName } from "../../store/userSlice";
+import { minusCount, addCount, deleteItem } from "../../store/cartSlice";
 
 const Cart = (props) => {
   let state = useSelector((state) => state.cart);
-  let state2 = useSelector((state) => state.user);
   let dispatch = useDispatch(); // store.js 로 요청 보내주는 함수
 
   return (
     <div>
-      {state2.name}({state2.age}) 의 장바구니
-      <button
-        onClick={() => {
-          dispatch(changeAge(10));
-        }}
-      >
-        버튼
-      </button>
       <Table>
         <thead>
           <tr>
@@ -38,10 +28,24 @@ const Cart = (props) => {
                 <td>
                   <button
                     onClick={() => {
+                      dispatch(minusCount(item.id));
+                    }}
+                  >
+                    -
+                  </button>
+                  <button
+                    onClick={() => {
                       dispatch(addCount(item.id));
                     }}
                   >
                     +
+                  </button>
+                  <button
+                    onClick={() => {
+                      dispatch(deleteItem(item.id));
+                    }}
+                  >
+                    삭제
                   </button>
                 </td>
               </tr>

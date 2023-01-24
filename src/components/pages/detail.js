@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { Nav } from "react-bootstrap";
 import TabContent from "../common/TabContent";
 import { useDispatch, useSelector } from "react-redux";
-import { addCart } from "../../store/cartSlice";
+import { addItem } from "../../store/cartSlice";
 
 const Detail = ({ shoes }) => {
   const { id } = useParams();
@@ -36,7 +36,7 @@ const Detail = ({ shoes }) => {
           <button
             className="btn btn-danger"
             onClick={() => {
-              dispatch(addCart(product));
+              dispatch(addItem(product));
             }}
           >
             주문하기
