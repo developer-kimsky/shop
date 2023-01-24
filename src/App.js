@@ -4,9 +4,10 @@ import { useState } from "react";
 import data from "./data";
 import Card from "./components/common/Card";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
-import Detail from "./components/pages/detail";
-import About from "./components/pages/about";
-import Event from "./components/pages/event";
+import Detail from "./components/pages/Detail";
+import About from "./components/pages/About";
+import Event from "./components/pages/Event";
+import Cart from "./components/pages/Cart";
 import axios from "axios";
 
 function App() {
@@ -91,6 +92,8 @@ function App() {
           }
         />
         <Route path="/detail/:id" element={<Detail shoes={shoes} />} />
+
+        <Route path="/cart" element={<Cart />} />
 
         <Route path="/about" element={<About />}>
           <Route path="member" element={<div>멤버정보</div>} />
