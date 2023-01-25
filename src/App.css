@@ -14,6 +14,24 @@
   background-position: center;
 }
 
+.main-bg .container {
+  height: 100%;
+  color: white;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.main-bg .container img {
+  width: 120px;
+  cursor: pointer;
+}
+
+.product-card {
+  cursor: pointer;
+}
+
 .App {
   text-align: center;
 }

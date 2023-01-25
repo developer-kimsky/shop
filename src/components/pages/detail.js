@@ -13,6 +13,10 @@ const Detail = ({ shoes }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    let watched = JSON.parse(localStorage.getItem("watched"));
+    watched.push(id);
+    watched = new Set(watched);
+    localStorage.setItem("watched", JSON.stringify([...watched]));
     return () => {};
   }, []);
 

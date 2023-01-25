@@ -7,6 +7,7 @@ const Card = ({ shoes }) => {
 
   return (
     <Col
+      className="product-card"
       key={shoes.id}
       onClick={() => {
         navigate(`/detail/${shoes.id}`);

@@ -1,6 +1,6 @@
 import "./App.css";
 import { Navbar, Container, Nav, Row, Col } from "react-bootstrap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import data from "./data";
 import Card from "./components/common/Card";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
@@ -9,13 +9,23 @@ import About from "./components/pages/About";
 import Event from "./components/pages/Event";
 import Cart from "./components/pages/Cart";
 import axios from "axios";
+import ImageCard from "./components/common/ImageCard";
 
 function App() {
   let [shoes, setShoes] = useState(data);
   let [count, setCount] = useState(2);
   let [loading, setLoading] = useState(false);
+  let [watched, setWatched] = useState([]);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!localStorage.getItem("watched")) {
+      localStorage.setItem("watched", JSON.stringify([]));
+    } else {
+      setWatched(JSON.parse(localStorage.getItem("watched")));
+    }
+  }, []);
 
   return (
     <div className="App">
@@ -43,6 +53,13 @@ function App() {
             >
               About
             </Nav.Link>
+            <Nav.Link
+              onClick={() => {
+                navigate("/cart");
+              }}
+            >
+              Cart
+            </Nav.Link>
           </Nav>
         </Container>
       </Navbar>
@@ -52,7 +69,21 @@ function App() {
           path="/"
           element={
             <>
-              <div className="main-bg"></div>
+              <div className="main-bg">
+                {watched.length > 0 && (
+                  <Container>
+                    <Row>
+                      <Col>Recently Viewed</Col>
+                    </Row>
+                    {watched
+                      .slice(-3)
+                      .reverse()
+                      .map((item, index) => {
+                        return <ImageCard key={index} watchedId={item} />;
+                      })}
+                  </Container>
+                )}
+              </div>
               <Container>
                 <Row>
                   {shoes.map((item) => {
